@@ -38,18 +38,35 @@ print("Model loaded successfully")
 
 def plot_similarity(labels1, labels2, features1, features2, rotation):
     corr = np.inner(features1, features2)
+    corr2 = corr.copy()
+    corr2[corr2<0.4]=0
+    corr2[corr2>=0.4]=1
+    #print(corr)
     sns.set(font_scale=0.6)
-    plt.figure(figsize=(100,100))
+    #plt.figure(figsize=(100,100))
     g = sns.heatmap(corr,\
-        xticklabels=labels1,\
-        yticklabels=labels2,\
+        #xticklabels=labels1,\
+        #yticklabels=labels2,\
         vmin=0,\
         vmax=1,\
+        #cmap="Greys")
         cmap="YlOrRd")
-    g.set_xticklabels(labels1, rotation=rotation)
+    #g.set_xticklabels(labels1, rotation=rotation)
     g.set_title("Semantic Textual Similarity")
     plt.tight_layout()
     plt.savefig("Quora.png")
+    plt.show()
+    #plt.figure(figsize=(100,100))
+    g = sns.heatmap(corr2,\
+        #xticklabels=labels1,\
+        #yticklabels=labels2,\
+        vmin=0,\
+        vmax=1,\
+        cmap="YlOrRd")
+    #g.set_xticklabels(labels1, rotation=rotation)
+    g.set_title("Semantic Textual Similarity")
+    plt.tight_layout()
+    plt.savefig("Quora-2.png")
     plt.show()
 
 def run_and_plot(session_, input_tensor_, messages1_, messages2_, labels1_,labels2_, encoding_tensor):
