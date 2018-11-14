@@ -19,7 +19,6 @@ with open(csv_fname,'r') as f:
         totalLines = f.readlines()[1:]
     else:
         totalLines = f.readlines()[1:numLines]
-    #print(len(totalLines))
     for line in totalLines:
         try:
             qid1, qid2, q1, q2 = line.strip().split(',')[1:5]
@@ -57,17 +56,7 @@ def plot_similarity(labels1, labels2, features1, features2, rotation):
     plt.savefig("Quora.png")
     plt.show()
     #plt.figure(figsize=(100,100))
-    g = sns.heatmap(corr2,\
-        #xticklabels=labels1,\
-        #yticklabels=labels2,\
-        vmin=0,\
-        vmax=1,\
-        cmap="YlOrRd")
     #g.set_xticklabels(labels1, rotation=rotation)
-    g.set_title("Semantic Textual Similarity")
-    plt.tight_layout()
-    plt.savefig("Quora-2.png")
-    plt.show()
     similar_qid = {}
     for i in range(len(labels1)):
         for j in range(len(labels2)):
